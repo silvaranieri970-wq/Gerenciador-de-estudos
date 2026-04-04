@@ -16,3 +16,29 @@ body .main-container .banner-estudos img {
     object-fit: cover; /* Recorta a imagem para preencher o espaço elegantemente */
     display: block; /* Remove espaços em branco indesejados abaixo da imagem */
 }
+/* --- AJUSTES PARA CELULAR --- */
+@media (max-width: 600px) {
+    body {
+        padding: 10px; /* Dá uma margem nas bordas da tela */
+    }
+
+    /* Faz os campos de texto e o botão ocuparem a largura toda */
+    input, select, button {
+        display: block;
+        width: 100%; 
+        margin: 10px 0; /* Dá espaço entre um e outro */
+        padding: 15px; /* Aumenta a área de toque (bom para o dedo) */
+        font-size: 16px; /* Evita que o iPhone dê zoom automático */
+        border-radius: 8px; /* Deixa as bordas arredondadas e modernas */
+    }
+
+    #banner-estudos {
+        width: 100%;
+        height: auto; /* Garante que a imagem não amasse */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Diminui um pouco o título para não quebrar linha */
+        text-align: center;
+    }
+}
