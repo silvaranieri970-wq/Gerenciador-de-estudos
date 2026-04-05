@@ -180,3 +180,52 @@ function atualizarSugestoesAssunto() {
 
 // 3. Conectar com o campo de matéria
 document.getElementById('input-materia').addEventListener('change', atualizarSugestoesAssunto);
+// 1. Assuntos reais baseados na grade da UDESC e no seu plano de ensino
+const assuntosPorMateria = {
+    "Introdução ao Desenvolvimento": [
+        "Tabela Verdade e Operadores Lógicos",
+        "Estruturas Condicionais (if/else)",
+        "Estruturas de Repetição (for/while)",
+        "Teste Automatizado e JUNIT",
+        "Arrays e Matrizes"
+    ],
+    "Fundamentos de Eng. Software": [
+        "Ciclo de Vida em Cascata",
+        "Desenvolvimento Incremental e Iterativo",
+        "Qualidade de Software (Pu)",
+        "Ética na Engenharia de Software"
+    ],
+    "Matemática Básica": [
+        "Funções de 1º e 2º Grau",
+        "Logaritmos e Exponenciais",
+        "Trigonometria no Triângulo Retângulo",
+        "Conjuntos Numéricos"
+    ],
+    "Processos de Software": [
+        "Fases do RUP (Concepção e Elaboração)",
+        "Metodologias Ágeis (Scrum)",
+        "Workflow de Requisitos",
+        "Gerenciamento de Mudanças"
+    ]
+};
+
+// 2. Função que faz a mágica de sugerir os assuntos
+function atualizarSugestoesAssunto() {
+    const materiaSelecionada = document.getElementById('input-materia').value;
+    const datalist = document.getElementById('sugestoes-assunto');
+    
+    // Limpa as sugestões anteriores
+    datalist.innerHTML = '';
+
+    // Se a matéria escolhida tiver assuntos na nossa lista, ele adiciona
+    if (assuntosPorMateria[materiaSelecionada]) {
+        assuntosPorMateria[materiaSelecionada].forEach(assunto => {
+            const option = document.createElement('option');
+            option.value = assunto;
+            datalist.appendChild(option);
+        });
+    }
+}
+
+// 3. Importante: Adicione esta linha para o sistema "ouvir" quando você troca a matéria
+document.getElementById('input-materia').addEventListener('change', atualizarSugestoesAssunto);
