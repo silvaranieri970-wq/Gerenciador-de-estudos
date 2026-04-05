@@ -153,3 +153,29 @@ button {
     padding: 16px;
     /* ... resto do código que já colocamos ... */
 }
+.topo-usuario {
+    display: flex;
+    justify-content: space-between; /* Joga o "Olá" pra um lado e o "Sair" pro outro */
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.btn-sair {
+    text-decoration: none;
+    color: #FF4D4D; /* Vermelho suave para indicar saída */
+    font-weight: bold;
+    font-size: 14px;
+    padding: 5px 10px;
+    border: 1px solid #FF4D4D;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.btn-sair:hover {
+    background-color: #FF4D4D;
+    color: white;
+}
