@@ -8,3 +8,18 @@ button { background: #27ae60; color: white; border: none; padding: 12px 20px; bo
 button:hover { background: #219150; }
 ul { list-style: none; padding: 0; }
 li { background: #f9f9f9; padding: 15px; border-left: 5px solid #27ae60; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+.botao-sair {
+    background: #fdfdfd;
+    border: 1px solid #d9534f;
+    color: #d9534f;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.botao-sair:hover {
+    background: #d9534f;
+    color: white;
+}
