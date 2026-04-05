@@ -46,7 +46,9 @@
         </div>
 <select id="filtro-fase" onchange="filtrarPorFase()">
         <div class="busca-container">
-            <input type="text" id="campo-busca" placeholder="Pesquisar nas minhas listas...">
+            <input type="text" id="input-assunto" list="sugestoes-assunto" placeholder="Ex: Estudar para prova">
+<datalist id="sugestoes-assunto"></datalist>
+           
             
             <select id="filtro-fase-tela" onchange="filtrarPorFase()">
                 <option value="todas">Todas as Fases</option>
