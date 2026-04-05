@@ -130,6 +130,26 @@ function filtrarPorFase() {
     listaP.innerHTML = '';
     listaC.innerHTML = '';
 
+// 3. Função para desenhar cada item na lista
+    const renderizarItem = (item, listaAlvo, tipo) => {
+        if (faseSelecionada === 'todas' || item.fase === faseSelecionada) {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span><strong>${item.materia}</strong>: ${item.assunto} 
+                <span class="tag-categoria">${item.categoria}</span></span>
+                <div>
+                    ${tipo === 'pendentes' ? `<button onclick="concluir(${item.id})">✅</button>` : ''}
+                    <button onclick="excluir(${item.id}, '${tipo}')">❌</button>
+                </div>
+            `;
+            listaAlvo.appendChild(li);
+        }
+    };
+
+    // 4. Manda o JS percorrer seus dados e preencher a tela
+    dados.pendentes.forEach(item => renderizarItem(item, listaP, 'pendentes'));
+    dados.concluidas.forEach(item => renderizarItem(item, listaC, 'concluidas'));
+}
     // 3. Função auxiliar para desenhar os itens (mantendo seu estilo atual)
     const renderizarItem = (item, listaAlvo, tipo) => {
         // Só renderiza se for "todas" ou se a fase do item for igual à selecionada
