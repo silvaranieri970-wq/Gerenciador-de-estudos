@@ -20,6 +20,21 @@ btnAdicionar.addEventListener('click', () => {
     const assunto = document.getElementById('assunto').value;
     const categoria = document.getElementById('categoria').value;
 
+    function atualizarOpcoesMaterias() {
+    const fase = document.getElementById('input-fase').value; // ID do select de fase no modal
+    const comboMateria = document.getElementById('input-materia'); // ID do select de matéria no modal
+    
+    comboMateria.innerHTML = '<option value="">Selecione a matéria...</option>';
+    
+    if (fase && gradeUdesc[fase]) {
+        gradeUdesc[fase].forEach(materia => {
+            const opt = document.createElement('option');
+            opt.value = materia;
+            opt.textContent = materia;
+            comboMateria.appendChild(opt);
+        });
+    }
+}
     if (materia && assunto) {
         dados.pendentes.push({ id: Date.now(), materia, assunto, categoria });
         document.getElementById('materia').value = '';
