@@ -1,3 +1,5 @@
+const gradeUdesc = { ... }; // Suas fases 1, 2, 3...
+let dados = JSON.parse(localStorage.getItem('ateliê_dados')) || { pendentes: [], concluidas: [] };
 function atualizarOpcoesMaterias() {
     const faseModal = document.getElementById('input-fase').value; // ID do select de fase no MODAL
     const selectMateria = document.getElementById('input-materia'); // ID do select de matéria
@@ -14,6 +16,7 @@ function atualizarOpcoesMaterias() {
         });
     }
 }
+
 const gradeUdesc = {
     "1": ["IDT - Introd. ao Desenv. de Software", "FES - Fundamentos de Eng. Software", "MAT - Matemática Básica", "PRS - Processos"],
     "2": ["DOO1 - Desenv. Orientado a Objetos I", "REQ - Requisitos de Software", "INF - Infraestruturas Computacionais", "BD1 - Modelagem de Dados"],
