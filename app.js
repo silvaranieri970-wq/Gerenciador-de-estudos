@@ -1,14 +1,7 @@
-// Banco de dados organizado por Fase -> Matéria -> Assuntos (sem siglas)
+// 1. BANCO DE DATOS (UDESC - 1ª a 4ª Fase)
 const dadosEstudos = {
     "1": {
-        "Introdução ao Desenvolvimento": [
-            "Processo de solução de problemas",
-            "Tabela Verdade e Operadores Lógicos",
-            "Estruturas Condicionais",
-            "Estruturas de Repetição (for/while)",
-            "Teste Automatizado (JUNIT)",
-            "Arrays e Matrizes"
-        ],
+        "Introdução ao Desenvolvimento": ["Processo de solução de problemas", "Tabela Verdade e Operadores Lógicos", "Estruturas Condicionais", "Estruturas de Repetição (for/while)", "Teste Automatizado (JUNIT)", "Arrays e Matrizes"],
         "Fundamentos de Eng. Software": ["Ciclo de Vida", "RUP", "Qualidade (Pu)", "Ética"],
         "Matemática Básica": ["Funções", "Logaritmos", "Trigonometria", "Conjuntos"]
     },
@@ -26,13 +19,13 @@ const dadosEstudos = {
     }
 };
 
+// 2. FUNÇÕES DE INTERFACE (MATÉRIAS E SUGESTÕES)
 function atualizarMaterias() {
     const fase = document.getElementById('input-fase').value;
     const selectMateria = document.getElementById('input-materia');
     selectMateria.innerHTML = '<option value="">Selecione a matéria</option>';
     
     if (dadosEstudos[fase]) {
-        // Pega as matérias da fase escolhida
         Object.keys(dadosEstudos[fase]).forEach(materia => {
             let opt = document.createElement('option');
             opt.value = materia;
@@ -48,7 +41,6 @@ function atualizarSugestoes() {
     const datalist = document.getElementById('sugestoes-lista');
     datalist.innerHTML = '';
     
-    // Procura os assuntos dentro da fase e matéria selecionadas
     if (dadosEstudos[fase] && dadosEstudos[fase][materia]) {
         dadosEstudos[fase][materia].forEach(assunto => {
             let opt = document.createElement('option');
@@ -58,72 +50,63 @@ function atualizarSugestoes() {
     }
 }
 
+// 3. LÓGICA DE SALVAMENTO (LOCAL STORAGE)
+function salvarNoCofre() {
+    const listaPendentes = document.getElementById("lista-pendentes").innerHTML;
+    localStorage.setItem('meuAtelieDados', listaPendentes);
+}
+
+window.onload = function() {
+    const salvo = localStorage.getItem('meuAtelieDados');
+    if (salvo) {
+        document.getElementById("lista-pendentes").innerHTML = salvo;
+    }
+};
+
+// 4. FUNÇÃO PRINCIPAL: ADICIONAR TAREFA
 function adicionarTarefa() {
     const materia = document.getElementById('input-materia').value;
     const assunto = document.getElementById('input-assunto').value;
     
-    if (!materia || !assunto) return alert("Escolha a matéria e o assunto!");
+    if (!materia || !assunto) {
+        alert("Por favor, selecione a matéria e o assunto!");
+        return;
+    }
+
+    // Gerando a data automática (dia/mês)
+    const hoje = new Date();
+    const dataFormatada = hoje.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
 
     const lista = document.getElementById('lista-pendentes');
     const li = document.createElement('li');
-    li.innerHTML = `<span><strong>${materia}</strong>: ${assunto}</span> <button onclick="this.parentElement.remove()" style="background:none; color:red; border:none; cursor:pointer">X</button>`;
+    li.style.marginBottom = "10px"; // Pequeno ajuste de espaço
+
+    // Montando o visual do item com o botão de excluir que também salva ao ser clicado
+    li.innerHTML = `
+        <span>
+            <i class="fas fa-calendar-alt" style="margin-right:8px; color:#666;"></i>
+            <small>${dataFormatada}</small> - 
+            <strong>${materia}</strong>: ${assunto}
+        </span>
+        <button onclick="this.parentElement.remove(); salvarNoCofre();" 
+                style="background:none; color:red; border:none; cursor:pointer; font-weight:bold; float:right;">
+            X
+        </button>
+    `;
+
     lista.appendChild(li);
     
+    // Salva automaticamente no navegador
+    salvarNoCofre();
+
+    // Limpa o campo de assunto para a próxima
     document.getElementById('input-assunto').value = '';
 }
-// 1. Função para carregar os dados assim que a página abre
-window.onload = function() {
-    const salvo = localStorage.getItem('meuAtelieDados');
-    if (salvo) {
-        document.getElementById("listas-container").innerHTML = salvo;
-    }
-};
 
-// 2. Função para salvar o estado atual da lista
-function salvarNoCofre() {
-    const conteudo = document.getElementById("listas-container").innerHTML;
-    localStorage.setItem('meuAtelieDados', conteudo);
-}
-
-// 3. Função do botão Sair
+// 5. FUNÇÃO SAIR (OPCIONAL)
 function sair() {
     if (confirm("Deseja limpar sua lista e sair?")) {
         localStorage.removeItem('meuAtelieDados');
         location.reload();
     }
-}
-
-// 4. Sua função adicionar atualizada com DATA e SALVAMENTO
-function adicionar() {
-    const materia = document.getElementById("materia-entrada").value;
-    const assunto = document.getElementById("entrada-assunto").value;
-
-    if (!materia || !assunto) {
-        alert("Por favor, preencha a matéria e o assunto!");
-        return;
-    }
-
-    // Criando a data automática
-    const hoje = new Date();
-    const dataFormatada = hoje.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
-
-    const lista = document.getElementById("listas-container");
-    const li = document.createElement("div");
-    li.className = "item-pendente"; // Certifique-se que essa classe existe no seu CSS
-
-    // Adicionando o ícone de calendário e o conteúdo
-    li.innerHTML = `
-        <i class="fas fa-calendar-alt" style="margin-right:8px; color:#666;"></i>
-        <small>${dataFormatada}</small> - 
-        <strong>${materia}</strong>: ${assunto}
-        <span onclick="this.parentElement.remove(); salvarNoCofre();" style="color:red; cursor:pointer; float:right; font-weight:bold;"> X</span>
-    `;
-
-    lista.appendChild(li);
-    
-    // SALVA no navegador imediatamente após adicionar
-    salvarNoCofre();
-
-    // Limpa o campo de assunto para o próximo
-    document.getElementById("entrada-assunto").value = "";
 }
