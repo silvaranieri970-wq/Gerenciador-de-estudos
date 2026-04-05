@@ -229,3 +229,20 @@ function atualizarSugestoesAssunto() {
 
 // 3. Importante: Adicione esta linha para o sistema "ouvir" quando você troca a matéria
 document.getElementById('input-materia').addEventListener('change', atualizarSugestoesAssunto);
+function atualizarSugestoesAssunto() {
+    const materiaSelecionada = document.getElementById('input-materia').value;
+    const datalist = document.getElementById('sugestoes-assunto');
+    
+    datalist.innerHTML = ''; // Limpa sugestões antigas
+
+    if (assuntosPorMateria[materiaSelecionada]) {
+        assuntosPorMateria[materiaSelecionada].forEach(assunto => {
+            const option = document.createElement('option');
+            option.value = assunto;
+            datalist.appendChild(option);
+        });
+    }
+}
+
+// Ativa a função sempre que a matéria mudar
+document.getElementById('input-materia').addEventListener('change', atualizarSugestoesAssunto);
