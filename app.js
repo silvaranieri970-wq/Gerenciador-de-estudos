@@ -43,21 +43,22 @@ function renderizar() {
 
     dados.pendentes.forEach(item => {
         const li = document.createElement('li');
-        li.innerHTML = `
-            <span><strong>${item.materia}</strong>: ${item.assunto} <span class="tag-categoria">${item.categoria}</span></span>
-            <div>
-                <button onclick="concluir(${item.id})">✅</button>
-                <button onclick="excluir(${item.id}, 'pendentes')">❌</button>
-            </div>
+       li.innerHTML = `
+    <span><strong>${item.materia}</strong>: ${item.assunto} <span class="tag-categoria">${item.categoria}</span></span>
+    <div>
+        <button onclick="concluir(${item.id})"><i class="fas fa-check"></i></button>
+        <button onclick="excluir(${item.id}, 'pendentes')"><i class="fas fa-trash-alt"></i></button>
+    </div>
+`;
         `;
         listaP.appendChild(li);
     });
 
     dados.concluidas.forEach(item => {
-        const li = document.createElement('li');
         li.innerHTML = `
-            <span>${item.materia} <span class="tag-categoria">${item.categoria}</span></span>
-            <button onclick="excluir(${item.id}, 'concluidas')">❌</button>
+    <span><del>${item.materia}</del> <span class="tag-categoria">${item.categoria}</span></span>
+    <button onclick="excluir(${item.id}, 'concluidas')"><i class="fas fa-trash-alt"></i></button>
+`;
         `;
         listaC.appendChild(li);
     });
