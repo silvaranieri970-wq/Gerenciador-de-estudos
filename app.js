@@ -75,14 +75,17 @@ function renderizar() {
         listaP.appendChild(li);
     });
 
-    dados.concluidas.forEach(item => {
-        li.innerHTML = `
-    <span><del>${item.materia}</del> <span class="tag-categoria">${item.categoria}</span></span>
-    <button onclick="excluir(${item.id}, 'concluidas')"><i class="fas fa-trash-alt"></i></button>
-`;
-        `;
-        listaC.appendChild(li);
-    });
+const novoItem = {
+    id: Date.now(), // Gera um ID único
+    materia: document.getElementById('input-materia').value,
+    assunto: document.getElementById('input-assunto').value,
+    categoria: document.getElementById('input-categoria').value,
+    fase: document.getElementById('input-fase').value // [NOVO] Pega a fase do modal
+};
+
+dados.pendentes.push(novoItem);
+salvarEDesenhar(); // Sua função que salva no localStorage e limpa a tela
+
 
     document.getElementById('count-pendentes').innerText = dados.pendentes.length;
     document.getElementById('count-concluidas').innerText = dados.concluidas.length;
