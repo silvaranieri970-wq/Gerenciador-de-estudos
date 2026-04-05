@@ -86,6 +86,15 @@ const novoItem = {
 dados.pendentes.push(novoItem);
 salvarEDesenhar(); // Sua função que salva no localStorage e limpa a tela
 
+// ... código anterior (linha 86/87)
+dados.pendentes.push(novoItem);
+salvarEDesenhar(); // Esta função agora deve apenas salvar no localStorage
+
+// ADICIONE ESTA LINHA AQUI:
+filtrarPorFase(); 
+
+// ... contadores continuam abaixo (linha 97/98)
+document.getElementById('count-pendentes').innerText = dados.pendentes.length;
 
     document.getElementById('count-pendentes').innerText = dados.pendentes.length;
     document.getElementById('count-concluidas').innerText = dados.concluidas.length;
