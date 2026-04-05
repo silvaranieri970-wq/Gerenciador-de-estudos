@@ -1,3 +1,19 @@
+function atualizarOpcoesMaterias() {
+    const faseModal = document.getElementById('input-fase').value; // ID do select de fase no MODAL
+    const selectMateria = document.getElementById('input-materia'); // ID do select de matéria
+    
+    // Limpa as opções atuais
+    selectMateria.innerHTML = '<option value="">Selecione a Matéria</option>';
+
+    if (gradeUdesc[faseModal]) {
+        gradeUdesc[faseModal].forEach(materia => {
+            const option = document.createElement('option');
+            option.value = materia;
+            option.text = materia;
+            selectMateria.appendChild(option);
+        });
+    }
+}
 const gradeUdesc = {
     "1": ["IDT - Introd. ao Desenv. de Software", "FES - Fundamentos de Eng. Software", "MAT - Matemática Básica", "PRS - Processos"],
     "2": ["DOO1 - Desenv. Orientado a Objetos I", "REQ - Requisitos de Software", "INF - Infraestruturas Computacionais", "BD1 - Modelagem de Dados"],
