@@ -42,3 +42,106 @@ body .main-container .banner-estudos img {
         text-align: center;
     }
 }
+/* --- CONFIGURAÇÕES GERAIS --- */
+:root {
+    --azul-primario: #0066FF; /* O azul vibrante do botão Adicionar */
+    --fundo-cinza: #F8F9FD;   /* O fundo clarinho do app */
+    --texto-escuro: #1E293B;  /* Cor dos títulos */
+    --bg-card: #FFFFFF;       /* Fundo branco dos cards */
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra suave */
+}
+
+body {
+    background-color: var(--fundo-cinza);
+    font-family: 'Inter', sans-serif; /* Se não tiver Inter, ele usa sans-serif */
+    color: var(--texto-escuro);
+    margin: 0;
+    padding: 20px;
+}
+
+/* --- O BANNER (ESTILO ACADEMIC ATELIER) --- */
+.banner-estudos {
+    width: 100%;
+    border-radius: 20px; /* Bordas bem arredondadas como no print */
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+}
+
+/* --- FORMULÁRIO (NEW MILESTONE) --- */
+.container-input {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #64748b;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    background-color: #F1F5F9; /* Cinza claro do fundo dos campos */
+    border: none;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    box-sizing: border-box; /* Garante que o padding não "estoure" a largura */
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--azul-primario);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:active {
+    transform: scale(0.98); /* Efeito de clique */
+}
+
+/* --- LISTAS (CARDS DAS MATÉRIAS) --- */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: var(--bg-card);
+    margin-bottom: 15px;
+    padding: 18px;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid var(--azul-primario); /* Detalhe azul na lateral */
+}
+
+/* Estilo para as matérias concluídas */
+.concluido li {
+    border-left-color: #CBD5E1; /* Cinza para o que já foi feito */
+    opacity: 0.8;
+}
+
+/* --- RESPONSIVIDADE (O QUE JÁ TINHAMOS) --- */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+}
