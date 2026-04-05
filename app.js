@@ -139,3 +139,44 @@ function filtrarPorFase() {
     // Dica: Para um filtro visual perfeito, o ideal é redesenhar a lista 
     // filtrando o array 'dados' antes do forEach.
 }
+// 1. Dicionário de Assuntos (Exemplo com IDT que você enviou)
+const assuntosPorMateria = {
+    "Introdução ao Desenvolvimento": [
+        "Processo de solução de problemas",
+        "Variáveis, constantes e tipos primitivos",
+        "Tabela Verdade e Operadores Lógicos",
+        "Estruturas Condicionais (se/então)",
+        "Estruturas de Repetição (for/while)",
+        "Subprogramas e Parametrização",
+        "Teste Unitário e JUNIT",
+        "Manipulação de Arrays e Matrizes"
+    ],
+    "Fundamentos de Eng. Software": [
+        "Ciclos de Vida (Cascata, Incremental)",
+        "Processo Unificado (RUP)",
+        "Qualidade de Software",
+        "Ética e Postura Profissional"
+    ]
+    // Você pode adicionar as outras matérias aqui seguindo o mesmo padrão!
+};
+
+// 2. Função para atualizar as sugestões de assunto
+function atualizarSugestoesAssunto() {
+    const materiaSelecionada = document.getElementById('input-materia').value;
+    const datalist = document.getElementById('sugestoes-assunto');
+    
+    // Limpa as sugestões atuais
+    datalist.innerHTML = '';
+
+    // Se existirem assuntos para essa matéria, adiciona-os ao datalist
+    if (assuntosPorMateria[materiaSelecionada]) {
+        assuntosPorMateria[materiaSelecionada].forEach(assunto => {
+            const option = document.createElement('option');
+            option.value = assunto;
+            datalist.appendChild(option);
+        });
+    }
+}
+
+// 3. Conectar com o campo de matéria
+document.getElementById('input-materia').addEventListener('change', atualizarSugestoesAssunto);
