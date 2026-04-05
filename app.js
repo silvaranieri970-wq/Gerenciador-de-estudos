@@ -80,3 +80,10 @@ renderizar();
 document.getElementById('btn-buscar').addEventListener('click', () => {
     campoBusca.dispatchEvent(new Event('input'));
 });
+const todasAsMaterias = [
+    { id: "IDT", nome: "Introdução ao Desenv. de Software e Testes", fase: "1", categoria: "Programação" },
+    { id: "MAT", nome: "Tópicos em Matemática Básica", fase: "1", categoria: "Exatas" },
+    { id: "DOO1", nome: "Desenv. de Software Orientado a Objetos I", fase: "2", categoria: "Programação" },
+    { id: "REQ", nome: "Requisitos de Software", fase: "2", categoria: "Programação" },
+    // Adicione as demais matérias da grade aqui...
+];
