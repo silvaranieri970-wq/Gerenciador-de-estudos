@@ -179,3 +179,17 @@ button {
     background-color: #FF4D4D;
     color: white;
 }
+/* Cor padrão para os ícones do Ateliê */
+.fas {
+    color: #ffffff; /* Branco dentro dos botões azuis */
+    margin-right: 8px;
+}
+
+/* Ícone de Sair e Títulos com cor específica */
+h3 .fas {
+    color: #0066FF; /* Azul nos títulos das listas */
+}
+
+.btn-sair .fas {
+    color: #FF4D4D; /* Vermelho no Sair */
+}
