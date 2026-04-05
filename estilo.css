@@ -252,3 +252,10 @@ li button:hover {
     background-color: #f8fafc;
     border-radius: 8px;
 }
+.banner-estudos img {
+    width: 100%;           /* Ocupa toda a largura da div pai */
+    max-height: 200px;     /* Limita a altura para não empurrar tudo para baixo */
+    object-fit: cover;     /* Corta a imagem sem distorcer para caber no espaço */
+    border-radius: 8px;
+    display: block;
+}
