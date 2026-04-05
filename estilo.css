@@ -145,3 +145,11 @@ li {
         font-size: 1.8rem;
     }
 }
+button {
+    width: 100%;
+    max-width: 400px; /* Impede que ele fique gigante no PC */
+    display: block;
+    margin: 10px auto; /* Centraliza o botão */
+    padding: 16px;
+    /* ... resto do código que já colocamos ... */
+}
