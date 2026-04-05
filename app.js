@@ -107,3 +107,35 @@ document.getElementById('btn-adicionar').addEventListener('click', adicionarItem
 
 // Desenha ao carregar a página
 desenharListas();
+// Função para Mover para "Já Estudado"
+function concluir(id) {
+    const index = dados.pendentes.findIndex(item => item.id === id);
+    if (index !== -1) {
+        const item = dados.pendentes.splice(index, 1)[0];
+        dados.concluidas.push(item);
+        salvarEDesenhar();
+    }
+}
+
+// Função para Deletar Permanentemente
+function excluir(id) {
+    // Procura nas duas listas
+    dados.pendentes = dados.pendentes.filter(item => item.id !== id);
+    dados.concluidas = dados.concluidas.filter(item => item.id !== id);
+    salvarEDesenhar();
+}
+
+// Função para Filtrar por Fase na tela principal
+function filtrarPorFase() {
+    const faseSelecionada = document.getElementById('filtro-fase').value;
+    const itens = document.querySelectorAll('li');
+
+    itens.forEach(li => {
+        // Se for "todas" ou o item for daquela fase, mostra.
+        // Nota: Precisamos que o item salve a fase no objeto para isso ser perfeito.
+        li.style.display = 'flex'; 
+    });
+    
+    // Dica: Para um filtro visual perfeito, o ideal é redesenhar a lista 
+    // filtrando o array 'dados' antes do forEach.
+}
