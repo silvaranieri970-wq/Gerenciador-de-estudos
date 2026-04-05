@@ -1,3 +1,9 @@
+const gradeUdesc = {
+    "1": ["IDT - Introd. ao Desenv. de Software", "FES - Fundamentos de Eng. Software", "MAT - Matemática Básica", "PRS - Processos"],
+    "2": ["DOO1 - Desenv. Orientado a Objetos I", "REQ - Requisitos de Software", "INF - Infraestruturas Computacionais", "BD1 - Modelagem de Dados"],
+    "3": ["DOO2 - Desenv. Orientado a Objetos II", "TES - Testes de Software", "IHC - Interface Humano-Computador", "MDI - Matemática Discreta"],
+    "4": ["PRJ - Projeto de Software", "EST - Probabilidade e Estatística", "RPE - Resolução de Problemas", "QUA - Qualidade de Software"]
+};
 const btnAdicionar = document.getElementById('btn-adicionar');
 const campoBusca = document.getElementById('campo-busca');
 
