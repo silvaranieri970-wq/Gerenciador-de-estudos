@@ -193,3 +193,27 @@ h3 .fas {
 .btn-sair .fas {
     color: #FF4D4D; /* Vermelho no Sair */
 }
+/* Cores dos ícones da lista */
+.fa-check {
+    color: #2ECC71; /* Verde */
+}
+
+.fa-trash-alt {
+    color: #E74C3C; /* Vermelho */
+}
+
+/* Deixa os botões da lista mais gordinhos e modernos */
+li button {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+li button:hover {
+    background: #e9ecef;
+    transform: scale(1.1);
+}
