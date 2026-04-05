@@ -1,63 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <title>Gerenciador de Estudos Pro</title>
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
 
     <div class="main-container">
         <h1><i class="fas fa-graduation-cap"></i> Ateliê Acadêmico</h1>
+        
         <div class="topo-usuario">
-    <span>Olá, Estudante!</span>
-    <a href="#" class="btn-sair" onclick="alert('Saindo do Ateliê Acadêmico...')">Sair</a>
-</div>
+            <span>Olá, Estudante!</span>
+            <a href="#" class="btn-sair" onclick="alert('Saindo...')">Sair</a>
+        </div>
 
         <div class="painel-entrada">
-            <input type="text" id="materia" placeholder="Matéria">
-            <input type="text" id="assunto" placeholder="Assunto">
-            <select id="categoria">
-                <option value="Geral">Geral</option>
-                <option value="Exatas">Exatas</option>
-                <option value="Programação">Programação</option>
-                <option value="Humanas">Humanas</option>
-            </select>
-            <button id="btn-adicionar"><i class="fas fa-plus-circle"></i> Adicionar</button>
+            <div class="linha-input">
+                <label>Fase:</label>
+                <select id="input-fase" onchange="atualizarOpcoesMaterias()">
+                    <option value="">Escolha a Fase</option>
+                    <option value="1">1ª Fase</option>
+                    <option value="2">2ª Fase</option>
+                    <option value="3">3ª Fase</option>
+                    <option value="4">4ª Fase</option>
+                </select>
+
+                <label>Matéria:</label>
+                <select id="input-materia">
+                    <option value="">Selecione a fase primeiro</option>
+                </select>
+            </div>
+
+            <div class="linha-input">
+                <input type="text" id="input-assunto" placeholder="Assunto (ex: Estudar para prova)">
+                <select id="input-categoria">
+                    <option value="Geral">Geral</option>
+                    <option value="Exatas">Exatas</option>
+                    <option value="Programação">Programação</option>
+                    <option value="Humanas">Humanas</option>
+                </select>
+                <button id="btn-adicionar"><i class="fas fa-plus-circle"></i> Adicionar</button>
+            </div>
         </div>
 
         <div class="busca-container">
             <input type="text" id="campo-busca" placeholder="Pesquisar nas minhas listas...">
-
-<button id="btn-buscar">
-    <i class="fas fa-search"></i> Buscar
-</button>
             
+            <select id="filtro-fase-tela" onchange="filtrarPorFase()">
+                <option value="todas">Todas as Fases</option>
+                <option value="1">1ª Fase</option>
+                <option value="2">2ª Fase</option>
+                <option value="3">3ª Fase</option>
+                <option value="4">4ª Fase</option>
+            </select>
         </div>
-        </div>
-
-<div class="filtro-container">
-    <label for="filtro-fase">Filtrar por Fase (UDESC):</label>
-    <select id="input-fase" onchange="atualizarOpcoesMaterias()">
-        <option value="todas">Ver Todas as Fases</option>
-        <option value="1">1ª Fase</option>
-        <option value="2">2ª Fase</option>
-        <option value="3">3ª Fase</option>
-        <option value="4">4ª Fase</option>
-    </select>
-    <label>Matéria:</label>
-    <select id="input-materia">
-        <option value="">Escolha a fase primeiro</option>
-    </select>
-    
-    <label>Assunto:</label>
-    <input type="text" id="input-assunto" placeholder="Ex: Estudar para prova">
-</div>
-
-<div class="banner-estudos">
 
         <div class="banner-estudos">
             <img src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c?q=80&w=1600" alt="Banner Estudos">
@@ -65,7 +63,7 @@
 
         <div class="colunas-listas">
             <div class="coluna">
-                <h3><i class="fas fa-tasks"></i></i> Plano de Estudos (<span id="count-pendentes">0</span>)</h3>
+                <h3><i class="fas fa-tasks"></i> Plano de Estudos (<span id="count-pendentes">0</span>)</h3>
                 <ul id="lista-pendentes"></ul>
             </div>
 
@@ -76,7 +74,6 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app.js"></script> 
 </body>
-
 </html>
