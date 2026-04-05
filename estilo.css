@@ -217,3 +217,17 @@ li button:hover {
     background: #e9ecef;
     transform: scale(1.1);
 }
+/* Cor azul para o ícone de busca e listas */
+.fa-search, .fa-list-ul, .fa-tasks {
+    color: #0066FF;
+}
+
+/* Cor verde para o que já foi estudado */
+.fa-check-double, .fa-check {
+    color: #2ECC71;
+}
+
+/* Cor vermelha para a lixeira */
+.fa-trash-alt {
+    color: #FF4D4D;
+}
