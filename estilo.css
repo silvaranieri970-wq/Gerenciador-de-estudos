@@ -231,3 +231,18 @@ li button:hover {
 .fa-trash-alt {
     color: #FF4D4D;
 }
+#campo-busca {
+    background-color: #f8fafc; /* Um cinza azulado bem clarinho */
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 15px;
+    transition: all 0.3s ease; /* Faz a transição de cor ser suave */
+}
+
+/* Quando você clica para digitar, a caixa "acende" */
+#campo-busca:focus {
+    border-color: #0066FF; /* O azul do seu projeto */
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(0, 102, 255, 0.2); /* Um brilho sutil */
+    outline: none;
+}
