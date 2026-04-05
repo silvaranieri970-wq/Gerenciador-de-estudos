@@ -246,3 +246,9 @@ li button:hover {
     box-shadow: 0 0 8px rgba(0, 102, 255, 0.2); /* Um brilho sutil */
     outline: none;
 }
+.filtro-container {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+}
