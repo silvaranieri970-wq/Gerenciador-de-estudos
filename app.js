@@ -1,56 +1,60 @@
-// 1. VERIFICAÇÃO DE ACESSO (MOCK)
+
+// 1. VERIFICAÇÃO DE ACESSO E PERSONALIZAÇÃO
 window.onload = function() {
     const usuario = localStorage.getItem('usuarioLogado');
     
-    // Se não houver usuário logado, redireciona para o login imediatamente
+    // Se não houver usuário logado, redireciona para o login
     if (!usuario) {
         window.location.href = "index.html";
         return;
     }
 
-    // Carrega os dados do "Cofre" se existirem
+    // Personaliza o título com o nome do usuário (antes do @)
+    const nomeUsuario = usuario.split('@')[0];
+    const titulo = document.querySelector('h1');
+    titulo.innerHTML = `<i class="fas fa-graduation-cap"></i> Olá, ${nomeUsuario}!`;
+
+    // Carrega os dados salvos se existirem
     const salvo = localStorage.getItem('meuAtelieDados');
     if (salvo) {
         document.getElementById("lista-pendentes").innerHTML = salvo;
     }
+    
+    // Atualiza o contador de tarefas inicial
+    atualizarContador();
 };
 
-// 2. BANCO DE DATOS (UDESC - 1ª a 4ª Fase)
+// 2. BANCO DE DADOS (UDESC - 1ª a 4ª Fase)
 const dadosEstudos = {
     "1": {
-        "Introdução ao Desenvolvimento": ["Processo de solução de problemas", "Tabela Verdade e Operadores Lógicos", "Estruturas Condicionais", "Estruturas de Repetição (for/while)", "Teste Automatizado (JUNIT)", "Arrays e Matrizes"],
+        "Introdução ao Desenvolvimento": ["Processo de solução de problemas", "Tabela Verdade e Operadores Lógicos"],
         "Fundamentos de Eng. Software": ["Ciclo de Vida", "RUP", "Qualidade (Pu)", "Ética"],
         "Matemática Básica": ["Funções", "Logaritmos", "Trigonometria", "Conjuntos"]
     },
     "2": {
-        "Desenvolvimento Orientado a Objetos I": ["Classes e Objetos", "Herança", "Polimorfismo"],
-        "Engenharia de Requisitos": ["Elicitação", "Análise", "Especificação"]
-    },
-    "3": {
-        "Sistemas Operacionais": ["Processos", "Memória", "Sistemas de Arquivos"],
-        "Banco de Dados I": ["Modelo ER", "SQL", "Normalização"]
-    },
-    "4": {
-        "Programação Web": ["HTML/CSS", "JavaScript", "Frameworks"],
-        "Estrutura de Dados": ["Listas", "Árvores", "Grafos"]
+        "Cálculo I": ["Limites", "Derivadas", "Integrais"],
+        "Álgebra Linear": ["Matrizes", "Vetores", "Sistemas Lineares"],
+        "Linguagem de Programação I": ["Ponteiros", "Alocação Dinâmica", "Estruturas"]
     }
+    // Você pode adicionar as fases 3 e 4 aqui depois!
 };
 
-// 3. FUNÇÕES DE INTERFACE
+// 3. LÓGICA DE INTERFACE
 function atualizarMaterias() {
     const fase = document.getElementById('input-fase').value;
     const selectMateria = document.getElementById('input-materia');
     selectMateria.innerHTML = '<option value="">Selecione a matéria</option>';
     
-    if (dadosEstudos[fase]) {
+    if (fase && dadosEstudos[fase]) {
         Object.keys(dadosEstudos[fase]).forEach(materia => {
             let opt = document.createElement('option');
             opt.value = materia;
-            opt.textContent = materia;
+            opt.innerHTML = materia;
             selectMateria.appendChild(opt);
         });
     }
 }
+
 function atualizarSugestoes() {
     const fase = document.getElementById('input-fase').value;
     const materia = document.getElementById('input-materia').value;
@@ -61,57 +65,58 @@ function atualizarSugestoes() {
         dadosEstudos[fase][materia].forEach(assunto => {
             let opt = document.createElement('option');
             opt.value = assunto;
-            // A linha abaixo foi corrigida (removi o erro de loop)
             datalist.appendChild(opt);
         });
     }
 }
 
-
-// 4. LÓGICA DE SALVAMENTO
-function salvarNoCofre() {
-    const listaPendentes = document.getElementById("lista-pendentes").innerHTML;
-    localStorage.setItem('meuAtelieDados', listaPendentes);
-}
-
-// 5. FUNÇÃO PRINCIPAL: ADICIONAR TAREFA
+// 4. LÓGICA DE TAREFAS
 function adicionarTarefa() {
     const materia = document.getElementById('input-materia').value;
     const assunto = document.getElementById('input-assunto').value;
     
     if (!materia || !assunto) {
-        alert("Por favor, selecione a matéria e o assunto!");
+        alert("Escolha a matéria e o assunto!");
         return;
     }
 
-    const hoje = new Date();
-    const dataFormatada = hoje.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
-
     const lista = document.getElementById('lista-pendentes');
-    const li = document.createElement('li');
-    li.style.marginBottom = "10px";
-
-    li.innerHTML = `
-        <span>
-            <i class="fas fa-calendar-alt" style="margin-right:8px; color:#666;"></i>
-            <small>${dataFormatada}</small> - 
-            <strong>${materia}</strong>: ${assunto}
-        </span>
-        <button onclick="this.parentElement.remove(); salvarNoCofre();" 
-                style="background:none; color:red; border:none; cursor:pointer; font-weight:bold; float:right;">
-            X
-        </button>
+    const data = new Date().toLocaleDateString('pt-BR', {day: '2d', month: '2d'});
+    
+    const item = document.createElement('li');
+    item.innerHTML = `
+        <span><i class="fas fa-calendar-day" style="color:#777; margin-right:10px"></i> <strong>${data} - ${materia}:</strong> ${assunto}</span>
+        <button onclick="removerTarefa(this)" style="background:none; color:#d9534f; font-weight:bold; padding:0">X</button>
     `;
-
-    lista.appendChild(li);
-    salvarNoCofre();
+    
+    lista.appendChild(item);
+    salvarDados();
     document.getElementById('input-assunto').value = '';
+    atualizarContador();
 }
 
-// 6. FUNÇÃO SAIR (AGORA COM NAVEGAÇÃO)
-function sair() {
-    if (confirm("Deseja encerrar sua sessão?")) {
-        localStorage.removeItem('usuarioLogado'); // Limpa o login
-        window.location.href = "index.html"; // Volta para o login
+function removerTarefa(botao) {
+    if(confirm("Deseja marcar como concluída?")) {
+        botao.parentElement.remove();
+        salvarDados();
+        atualizarContador();
     }
+}
+
+function atualizarContador() {
+    const total = document.querySelectorAll('#lista-pendentes li').length;
+    const contadorArea = document.getElementById('numero-tarefas');
+    if(contadorArea) {
+        contadorArea.innerText = total;
+    }
+}
+
+function salvarDados() {
+    const conteudo = document.getElementById("lista-pendentes").innerHTML;
+    localStorage.setItem('meuAtelieDados', conteudo);
+}
+
+function sair() {
+    localStorage.removeItem('usuarioLogado');
+    window.location.href = "index.html";
 }
