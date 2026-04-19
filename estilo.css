@@ -1,6 +1,13 @@
-body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; padding: 20px; }
-.main-container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 800px; }
+body {
+    background: linear-gradient(135deg, #f4f7f6 0%, #e1e8e7 100%);
+    min-height: 100vh;
+}
 
+.main-container {
+    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
 h1 { color: #2c3e50; text-align: center; margin-bottom: 25px; }
 .painel-entrada { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
 .linha-input { display: flex; gap: 10px; }
