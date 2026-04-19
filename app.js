@@ -1,4 +1,21 @@
-// 1. BANCO DE DATOS (UDESC - 1ª a 4ª Fase)
+// 1. VERIFICAÇÃO DE ACESSO (MOCK)
+window.onload = function() {
+    const usuario = localStorage.getItem('usuarioLogado');
+    
+    // Se não houver usuário logado, redireciona para o login imediatamente
+    if (!usuario) {
+        window.location.href = "index.html";
+        return;
+    }
+
+    // Carrega os dados do "Cofre" se existirem
+    const salvo = localStorage.getItem('meuAtelieDados');
+    if (salvo) {
+        document.getElementById("lista-pendentes").innerHTML = salvo;
+    }
+};
+
+// 2. BANCO DE DATOS (UDESC - 1ª a 4ª Fase)
 const dadosEstudos = {
     "1": {
         "Introdução ao Desenvolvimento": ["Processo de solução de problemas", "Tabela Verdade e Operadores Lógicos", "Estruturas Condicionais", "Estruturas de Repetição (for/while)", "Teste Automatizado (JUNIT)", "Arrays e Matrizes"],
@@ -19,7 +36,7 @@ const dadosEstudos = {
     }
 };
 
-// 2. FUNÇÕES DE INTERFACE (MATÉRIAS E SUGESTÕES)
+// 3. FUNÇÕES DE INTERFACE
 function atualizarMaterias() {
     const fase = document.getElementById('input-fase').value;
     const selectMateria = document.getElementById('input-materia');
@@ -45,25 +62,19 @@ function atualizarSugestoes() {
         dadosEstudos[fase][materia].forEach(assunto => {
             let opt = document.createElement('option');
             opt.value = assunto;
+            opt.appendChild(datalist); // Ajuste: datalist.appendChild(opt)
             datalist.appendChild(opt);
         });
     }
 }
 
-// 3. LÓGICA DE SALVAMENTO (LOCAL STORAGE)
+// 4. LÓGICA DE SALVAMENTO
 function salvarNoCofre() {
     const listaPendentes = document.getElementById("lista-pendentes").innerHTML;
     localStorage.setItem('meuAtelieDados', listaPendentes);
 }
 
-window.onload = function() {
-    const salvo = localStorage.getItem('meuAtelieDados');
-    if (salvo) {
-        document.getElementById("lista-pendentes").innerHTML = salvo;
-    }
-};
-
-// 4. FUNÇÃO PRINCIPAL: ADICIONAR TAREFA
+// 5. FUNÇÃO PRINCIPAL: ADICIONAR TAREFA
 function adicionarTarefa() {
     const materia = document.getElementById('input-materia').value;
     const assunto = document.getElementById('input-assunto').value;
@@ -73,15 +84,13 @@ function adicionarTarefa() {
         return;
     }
 
-    // Gerando a data automática (dia/mês)
     const hoje = new Date();
     const dataFormatada = hoje.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
 
     const lista = document.getElementById('lista-pendentes');
     const li = document.createElement('li');
-    li.style.marginBottom = "10px"; // Pequeno ajuste de espaço
+    li.style.marginBottom = "10px";
 
-    // Montando o visual do item com o botão de excluir que também salva ao ser clicado
     li.innerHTML = `
         <span>
             <i class="fas fa-calendar-alt" style="margin-right:8px; color:#666;"></i>
@@ -95,18 +104,14 @@ function adicionarTarefa() {
     `;
 
     lista.appendChild(li);
-    
-    // Salva automaticamente no navegador
     salvarNoCofre();
-
-    // Limpa o campo de assunto para a próxima
     document.getElementById('input-assunto').value = '';
 }
 
-// 5. FUNÇÃO SAIR (OPCIONAL)
+// 6. FUNÇÃO SAIR (AGORA COM NAVEGAÇÃO)
 function sair() {
-    if (confirm("Deseja limpar sua lista e sair?")) {
-        localStorage.removeItem('meuAtelieDados');
-        location.reload();
+    if (confirm("Deseja encerrar sua sessão?")) {
+        localStorage.removeItem('usuarioLogado'); // Limpa o login
+        window.location.href = "index.html"; // Volta para o login
     }
 }
