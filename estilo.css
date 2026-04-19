@@ -31,3 +31,60 @@ li { background: #f9f9f9; padding: 15px; border-left: 5px solid #27ae60; margin-
     background: #d9534f;
     color: white;
 }
+/* Configuração do Grid de 3 Colunas */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 150px 1fr 150px; /* Esquerda, Centro, Direita */
+    gap: 20px;
+    align-items: start;
+}
+
+.coluna-lateral {
+    padding-top: 20px;
+}
+
+.coluna-lateral h3 {
+    font-size: 0.9em;
+    text-transform: uppercase;
+    color: #95a5a6;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* Estilo dos Links na Esquerda */
+.links-uteis {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.links-uteis a {
+    text-decoration: none;
+    color: #34495e;
+    font-size: 0.9em;
+    padding: 8px;
+    border-radius: 6px;
+    background: #f8f9fa;
+    transition: 0.3s;
+    border: 1px solid #eee;
+}
+
+.links-uteis a:hover {
+    background: #27ae60;
+    color: white;
+}
+
+/* Card da Direita */
+.card-info {
+    background: #e8f5e9;
+    padding: 10px;
+    border-radius: 8px;
+    border-left: 4px solid #27ae60;
+}
+
+/* Responsividade (Para não quebrar no telemóvel) */
+@media (max-width: 700px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
