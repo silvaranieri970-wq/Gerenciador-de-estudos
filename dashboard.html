@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Ateliê Acadêmico - Painel</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-container">
+        <button onclick="sair()" class="botao-sair" style="background:none; border:none; color:#d9534f; cursor:pointer; float:right; font-size: 1.1em;">
+            <i class="fas fa-sign-out-alt"></i> Sair
+        </button>
+
+        <h1><i class="fas fa-graduation-cap"></i> Ateliê Acadêmico</h1>
+        
+        <div class="painel-entrada">
+            <div class="linha-input">
+                <select id="input-fase" onchange="atualizarMaterias()">
+                    <option value="">Escolha a Fase</option>
+                    <option value="1">1ª Fase</option>
+                    <option value="2">2ª Fase</option>
+                    <option value="3">3ª Fase</option>
+                    <option value="4">4ª Fase</option>
+                </select>
+                <select id="input-materia" onchange="atualizarSugestoes()">
+                    <option value="">Selecione a fase</option>
+                </select>
+            </div>
+            <div class="linha-input">
+                <input type="text" id="input-assunto" list="sugestoes-lista" placeholder="Assunto (ex: Tabela Verdade)">
+                <datalist id="sugestoes-lista"></datalist>
+                <button onclick="adicionarTarefa()"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="listas-container">
+            <div class="coluna">
+                <h3><i class="fas fa-tasks"></i> Pendentes</h3>
+                <ul id="lista-pendentes"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
