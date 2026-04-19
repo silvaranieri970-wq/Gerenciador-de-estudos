@@ -51,7 +51,6 @@ function atualizarMaterias() {
         });
     }
 }
-
 function atualizarSugestoes() {
     const fase = document.getElementById('input-fase').value;
     const materia = document.getElementById('input-materia').value;
@@ -62,11 +61,12 @@ function atualizarSugestoes() {
         dadosEstudos[fase][materia].forEach(assunto => {
             let opt = document.createElement('option');
             opt.value = assunto;
-            opt.appendChild(datalist); // Ajuste: datalist.appendChild(opt)
+            // A linha abaixo foi corrigida (removi o erro de loop)
             datalist.appendChild(opt);
         });
     }
 }
+
 
 // 4. LÓGICA DE SALVAMENTO
 function salvarNoCofre() {
