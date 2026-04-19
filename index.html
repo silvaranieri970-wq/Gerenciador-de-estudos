@@ -2,37 +2,67 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Ateliê Acadêmico</title>
+    <title>Ateliê Acadêmico - Painel</title>
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="main-container" style="max-width: 400px; margin: 100px auto; padding: 30px;">
-        <h1 style="text-align: center;"><i class="fas fa-graduation-cap"></i> Login</h1>
-        <p style="text-align: center; color: #666; margin-bottom: 20px;">Ateliê Acadêmico</p>
-        
-        <div class="painel-entrada" style="display: flex; flex-direction: column; gap: 15px;">
-            <input type="email" id="email-login" placeholder="Seu e-mail da UDESC" style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ddd;">
-            <input type="password" id="senha-login" placeholder="Sua senha" style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ddd;">
-            <button onclick="realizarLogin()" style="width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer;">
-                <i class="fas fa-sign-in-alt"></i> Entrar
-            </button>
-        </div>
-    </div>
+    <div class="main-container">
+        <div class="dashboard-grid">
+            
+            <aside class="coluna-lateral">
+                <h3><i class="fas fa-link"></i> Atalhos</h3>
+                <nav class="links-uteis">
+                    <a href="https://www.udesc.br/siga" target="_blank">SIGA</a>
+                    <a href="https://moodle.udesc.br/" target="_blank">Moodle</a>
+                    <a href="https://www.udesc.br/biblioteca" target="_blank">Biblioteca</a>
+                </nav>
+            </aside>
 
-    <script>
-        function realizarLogin() {
-            const email = document.getElementById('email-login').value;
-            const senha = document.getElementById('senha-login').value;
+            <section class="coluna-principal">
+                <button onclick="sair()" class="botao-sair" style="float: right;">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+                
+                <h1><i class="fas fa-graduation-cap"></i> Ateliê</h1>
+                
+                <div class="painel-entrada">
+                    <div class="linha-input">
+                        <select id="input-fase" onchange="atualizarMaterias()">
+                            <option value="">Escolha a Fase</option>
+                            <option value="1">1ª Fase</option>
+                            <option value="2">2ª Fase</option>
+                            <option value="3">3ª Fase</option>
+                            <option value="4">4ª Fase</option>
+                        </select>
+                        <select id="input-materia" onchange="atualizarSugestoes()">
+                            <option value="">Selecione a fase</option>
+                        </select>
+                    </div>
+                    <div class="linha-input">
+                        <input type="text" id="input-assunto" list="sugestoes-lista" placeholder="Assunto (ex: Tabela Verdade)">
+                        <datalist id="sugestoes-lista"></datalist>
+                        <button onclick="adicionarTarefa()"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
 
-            // Se o campo não estiver vazio, ele "loga"
-            if (email !== "" && senha !== "") {
-                localStorage.setItem('usuarioLogado', email);
-                window.location.href = "dashboard.html"; // MANDA PARA O DASHBOARD
-            } else {
-                alert("Por favor, preencha os dados de acesso.");
-            }
-        }
-    </script>
+                <div class="listas-container">
+                    <div class="coluna">
+                        <h3><i class="fas fa-tasks"></i> Pendentes</h3>
+                        <ul id="lista-pendentes"></ul>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="coluna-lateral">
+                <h3><i class="fas fa-clock"></i> Agora</h3>
+                <div id="relogio" style="font-size: 1.1em; font-weight: bold; color: #27ae60;">00:00:00</div>
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                <p style="font-size: 0.8em; color: #999;">
+                    Pendências: <strong id="numero-tarefas" style="color: #27ae60;">0</strong>
+                </p>
+            </aside>
+
+        </div> </div> <script src="app.js"></script>
 </body>
 </html>
