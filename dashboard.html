@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,6 +14,7 @@
         </button>
 
         <h1><i class="fas fa-graduation-cap"></i> Ateliê Acadêmico</h1>
+        
         <div class="painel-entrada">
             <div class="linha-input">
                 <select id="input-fase" onchange="atualizarMaterias()">
@@ -32,22 +34,6 @@
                 <button onclick="adicionarTarefa()"><i class="fas fa-plus"></i></button>
             </div>
         </div>
-        
-      
-                </select>
-                <select id="input-materia" onchange="atualizarSugestoes()">
-                    <option value="">Selecione a fase</option>
-                </select>
-            </div>
-            <div class="linha-input">
-    <input type="text" id="input-assunto" list="sugestoes-lista" placeholder="Assunto (ex: Tabela Verdade)">
-    <datalist id="sugestoes-lista"></datalist>
-    <button onclick="adicionarTarefa()"><i class="fas fa-plus"></i></button>
-</div>
-            
-             <button onclick="adicionarTarefa()"><i class="fas fa-plus"></i></button>
-            </div>
-        </div>
 
         <div class="listas-container">
             <div class="coluna">
@@ -56,6 +42,7 @@
             </div>
         </div>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
