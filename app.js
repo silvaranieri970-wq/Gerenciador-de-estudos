@@ -1,30 +1,28 @@
-
 // 1. VERIFICAÇÃO DE ACESSO E PERSONALIZAÇÃO
 window.onload = function() {
     const usuario = localStorage.getItem('usuarioLogado');
     
-    // Se não houver usuário logado, redireciona para o login
     if (!usuario) {
         window.location.href = "index.html";
         return;
     }
 
-    // Personaliza o título com o nome do usuário (antes do @)
     const nomeUsuario = usuario.split('@')[0];
     const titulo = document.querySelector('h1');
-    titulo.innerHTML = `<i class="fas fa-graduation-cap"></i> Olá, ${nomeUsuario}!`;
+    if (titulo) titulo.innerHTML = `<i class="fas fa-graduation-cap"></i> Olá, ${nomeUsuario}!`;
 
-    // Carrega os dados salvos se existirem
+    // Carrega dados salvos
     const salvo = localStorage.getItem('meuAtelieDados');
     if (salvo) {
-        document.getElementById("lista-pendentes").innerHTML = salvo;
+        const lista = document.getElementById("lista-pendentes");
+        if (lista) lista.innerHTML = salvo;
     }
     
-    // Atualiza o contador de tarefas inicial
     atualizarContador();
+    atualizarRelogio();
 };
 
-// 2. BANCO DE DADOS (UDESC - 1ª a 4ª Fase)
+// 2. BANCO DE DADOS (UDESC)
 const dadosEstudos = {
     "1": {
         "Introdução ao Desenvolvimento": ["Processo de solução de problemas", "Tabela Verdade e Operadores Lógicos"],
@@ -35,22 +33,31 @@ const dadosEstudos = {
         "Cálculo I": ["Limites", "Derivadas", "Integrais"],
         "Álgebra Linear": ["Matrizes", "Vetores", "Sistemas Lineares"],
         "Linguagem de Programação I": ["Ponteiros", "Alocação Dinâmica", "Estruturas"]
+    },
+    "3": {
+        "Estruturas de Dados": ["Listas", "Pilhas", "Filas", "Árvores"],
+        "Sistemas Operacionais": ["Processos", "Memória", "File Systems"]
+    },
+    "4": {
+        "Banco de Dados I": ["Modelagem ER", "SQL", "Normalização"],
+        "Engenharia de Requisitos": ["Elicitação", "User Stories", "Casos de Uso"]
     }
-    // Você pode adicionar as fases 3 e 4 aqui depois!
 };
+
+// 3. WIDGETS
 function atualizarRelogio() {
     const agora = new Date();
     const tempo = agora.toLocaleTimeString('pt-BR');
     const el = document.getElementById('relogio');
     if(el) el.innerText = tempo;
 }
-setInterval(atualizarRelogio, 1000); // Atualiza a cada 1 segundo
+setInterval(atualizarRelogio, 1000);
 
-// 3. LÓGICA DE INTERFACE
+// 4. LÓGICA DE INTERFACE
 function atualizarMaterias() {
     const fase = document.getElementById('input-fase').value;
     const selectMateria = document.getElementById('input-materia');
-    selectMateria.innerHTML = '<option value="">Selecione a matéria</option>';
+    selectMateria.innerHTML = '<option value="">Matéria</option>';
     
     if (fase && dadosEstudos[fase]) {
         Object.keys(dadosEstudos[fase]).forEach(materia => {
@@ -66,6 +73,7 @@ function atualizarSugestoes() {
     const fase = document.getElementById('input-fase').value;
     const materia = document.getElementById('input-materia').value;
     const datalist = document.getElementById('sugestoes-lista');
+    if (!datalist) return;
     datalist.innerHTML = '';
     
     if (dadosEstudos[fase] && dadosEstudos[fase][materia]) {
@@ -77,23 +85,31 @@ function atualizarSugestoes() {
     }
 }
 
-// 4. LÓGICA DE TAREFAS
+// 5. LÓGICA DE TAREFAS (AQUI ESTAVA O ERRO)
 function adicionarTarefa() {
     const materia = document.getElementById('input-materia').value;
     const assunto = document.getElementById('input-assunto').value;
+    const lista = document.getElementById('lista-pendentes');
     
     if (!materia || !assunto) {
         alert("Escolha a matéria e o assunto!");
         return;
     }
 
-    const lista = document.getElementById('lista-pendentes');
-    const data = new Date().toLocaleDateString('pt-BR', {day: '2d', month: '2d'});
+    if (!lista) {
+        console.error("Erro: Elemento 'lista-pendentes' não encontrado no HTML!");
+        return;
+    }
+
+    const dataObj = new Date();
+    const dia = String(dataObj.getDate()).padStart(2, '0');
+    const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+    const dataFormatada = `${dia}/${mes}`;
     
     const item = document.createElement('li');
     item.innerHTML = `
-        <span><i class="fas fa-calendar-day" style="color:#777; margin-right:10px"></i> <strong>${data} - ${materia}:</strong> ${assunto}</span>
-        <button onclick="removerTarefa(this)" style="background:none; color:#d9534f; font-weight:bold; padding:0">X</button>
+        <span><i class="fas fa-calendar-day" style="color:#777; margin-right:10px"></i> <strong>${dataFormatada} - ${materia}:</strong> ${assunto}</span>
+        <button onclick="removerTarefa(this)" style="background:none; color:#d9534f; font-weight:bold; border:none; cursor:pointer;">X</button>
     `;
     
     lista.appendChild(item);
@@ -119,8 +135,10 @@ function atualizarContador() {
 }
 
 function salvarDados() {
-    const conteudo = document.getElementById("lista-pendentes").innerHTML;
-    localStorage.setItem('meuAtelieDados', conteudo);
+    const lista = document.getElementById("lista-pendentes");
+    if (lista) {
+        localStorage.setItem('meuAtelieDados', lista.innerHTML);
+    }
 }
 
 function sair() {
