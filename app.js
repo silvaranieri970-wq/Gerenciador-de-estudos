@@ -38,6 +38,13 @@ const dadosEstudos = {
     }
     // Você pode adicionar as fases 3 e 4 aqui depois!
 };
+function atualizarRelogio() {
+    const agora = new Date();
+    const tempo = agora.toLocaleTimeString('pt-BR');
+    const el = document.getElementById('relogio');
+    if(el) el.innerText = tempo;
+}
+setInterval(atualizarRelogio, 1000); // Atualiza a cada 1 segundo
 
 // 3. LÓGICA DE INTERFACE
 function atualizarMaterias() {
