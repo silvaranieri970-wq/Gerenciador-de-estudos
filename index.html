@@ -2,58 +2,27 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Ateliê Acadêmico - Painel</title>
+    <title>Ateliê Acadêmico - Login</title>
     <link rel="stylesheet" href="estilo.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="main-container">
-        <div class="dashboard-grid">
-            
-            <aside class="coluna-lateral">
-                <h3><i class="fas fa-link"></i> Atalhos</h3>
-                <nav class="links-uteis">
-                    <a href="https://www.udesc.br/siga" target="_blank">SIGA</a>
-                    <a href="https://moodle.udesc.br/" target="_blank">Moodle</a>
-                </nav>
-            </aside>
-
-            <section class="coluna-principal">
-                <button onclick="sair()" class="botao-sair" style="float: right;">Sair</button>
-                <h1><i class="fas fa-graduation-cap"></i> Ateliê</h1>
-                
-                <div class="painel-entrada">
-                    <div class="linha-input">
-                        <select id="input-fase" onchange="atualizarMaterias()">
-                            <option value="">Fase</option>
-                            <option value="1">1ª Fase</option>
-                            <option value="2">2ª Fase</option>
-                            <option value="3">3ª Fase</option>
-                            <option value="4">4ª Fase</option>
-                        </select>
-                        <select id="input-materia" onchange="atualizarSugestoes()">
-                            <option value="">Matéria</option>
-                        </select>
-                    </div>
-                    <div class="linha-input">
-                        <input type="text" id="input-assunto" list="sugestoes-lista" placeholder="Assunto...">
-                        <datalist id="sugestoes-lista"></datalist>
-                        <button onclick="adicionarTarefa()"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>
-
-                <ul id="lista-pendentes"></ul>
-            </section>
-
-            <aside class="coluna-lateral">
-                <h3><i class="fas fa-clock"></i> Agora</h3>
-                <div id="relogio" style="font-weight: bold; color: #27ae60;">00:00:00</div>
-                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
-                <p style="font-size: 0.8em; color: #999;">Pendências: <strong id="numero-tarefas">0</strong></p>
-            </aside>
-
+    <div class="main-container" style="max-width: 400px; margin-top: 100px;">
+        <h1>Login</h1>
+        <div class="painel-entrada">
+            <input type="email" id="email-login" placeholder="Seu e-mail da UDESC">
+            <button onclick="realizarLogin()">Entrar</button>
         </div>
     </div>
-    <script src="app.js"></script>
+    <script>
+        function realizarLogin() {
+            const email = document.getElementById('email-login').value;
+            if (email.includes('@')) {
+                localStorage.setItem('usuarioLogado', email);
+                window.location.href = "dashboard.html";
+            } else {
+                alert("Insira um e-mail válido");
+            }
+        }
+    </script>
 </body>
 </html>
