@@ -2,27 +2,33 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ateliê Acadêmico - Login</title>
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <div class="main-container" style="max-width: 400px; margin-top: 100px;">
-        <h1>Login</h1>
+    <div class="main-container" style="max-width: 400px; margin-top: 80px;">
+        <h1 style="text-align: center; margin-bottom: 20px;">Login Acadêmico</h1>
         <div class="painel-entrada">
-            <input type="email" id="email-login" placeholder="Seu e-mail da UDESC">
-            <button onclick="realizarLogin()">Entrar</button>
+            <input type="email" id="email-login" placeholder="E-mail da UDESC">
+            <input type="password" id="senha-login" placeholder="Sua Senha">
+            <button onclick="realizarLogin()">Entrar no Sistema</button>
         </div>
     </div>
     <script>
         function realizarLogin() {
             const email = document.getElementById('email-login').value;
-            if (email.includes('@')) {
+            const senha = document.getElementById('senha-login').value;
+
+            // Validação simples: e-mail com @ e senha '1234'
+            if (email.includes('@') && senha === '1234') {
                 localStorage.setItem('usuarioLogado', email);
                 window.location.href = "dashboard.html";
             } else {
-                alert("Insira um e-mail válido");
+                alert("E-mail inválido ou senha incorreta (Dica: 1234)");
             }
         }
+        if(localStorage.getItem('usuarioLogado')) window.location.href = "dashboard.html";
     </script>
 </body>
 </html>
