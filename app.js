@@ -54,10 +54,12 @@ function adicionarTarefa() {
     const mat = document.getElementById('input-materia').value;
     const ass = document.getElementById('input-assunto').value;
     const lista = document.getElementById('lista-pendentes');
+    const dataAtual = new Date();
+    const dataFormatada = dataAtual.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
     if (!mat || !ass) return alert("Escolha matéria e assunto!");
 
     const li = document.createElement('li');
-    li.innerHTML = `<span><strong>${mat}:</strong> ${ass}</span> <button onclick="remover(this)" style="background:none; color:red; border:none; cursor:pointer; font-weight:bold;">X</button>`;
+    li.innerHTML = `<span>${dataFormatada} - <strong>${mat}:</strong> ${ass}</span> <button onclick="removerTarefa(this)">X</button>`;
     lista.appendChild(li);
     localStorage.setItem('meuAtelieDados', lista.innerHTML);
     atualizarContador();
