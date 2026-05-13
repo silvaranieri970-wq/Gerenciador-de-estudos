@@ -59,8 +59,7 @@ function adicionarTarefa() {
     if (!mat || !ass) return alert("Escolha matéria e assunto!");
 
     const li = document.createElement('li');
-    li.innerHTML = `<span>${dataFormatada} - <strong>${mat}:</strong> ${ass}</span> <button onclick="this.parentElement.remove(); atualizarContador();" style="background:none; color:red; border:none; cursor:pointer; font-weight:bold; float:right;">X</button>`;
-   
+    li.innerHTML = `<span>${dataFormatada} - <strong>${mat}:</strong> ${ass}</span> <button onclick="this.closest('li').remove(); atualizarContador(); localStorage.setItem('meuAtelieDados', document.getElementById('lista-pendentes').innerHTML);" style="background:none; color:red; border:none; cursor:pointer; font-weight:bold; float:right; padding: 5px;">X</button>`;
    
     lista.appendChild(li);
     localStorage.setItem('meuAtelieDados', lista.innerHTML);
